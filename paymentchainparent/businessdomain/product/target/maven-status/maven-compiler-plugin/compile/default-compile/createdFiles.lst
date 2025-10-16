@@ -1,7 +1,0 @@
-com\paymentchain\businessdomain\controller\ProductController.class
-com\paymentchain\businessdomain\repository\ProductoRepository.class
-com\paymentchain\businessdomain\common\StandarizedApiExceptionResponse.class
-com\paymentchain\businessdomain\exceptions\ApiExceptionHandler.class
-com\paymentchain\businessdomain\entities\Product.class
-com\paymentchain\businessdomain\ProductApplication.class
-com\paymentchain\businessdomain\exceptions\BussinesRuleException.class

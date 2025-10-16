@@ -1,0 +1,17 @@
+# Directorios de compilación de Java/Maven
+# Ignora la carpeta 'target' en cualquier lugar del proyecto
+target/
+
+# Ignora archivos compilados específicos de Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# IDEs y otros archivos de configuración local
+.idea/
+.vscode/
+*.iml
+.DS_Store
