@@ -1,0 +1,25 @@
+package com.paymentchain.billing.exception;
+
+
+import com.paymentchain.billing.common.StandarizedApiExceptionResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class ApiExceptionHandler {
+
+    public ResponseEntity<?> handleUnknownException(Exception ex) {
+        StandarizedApiExceptionResponse standarizedApiExceptionResponse = new StandarizedApiExceptionResponse("TECNICO", "Input Output Error", "1024", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(standarizedApiExceptionResponse);
+    }
+
+    @ExceptionHandler(BussinesRuleException.class)
+    public ResponseEntity<?> handleUnknownException(BussinesRuleException ex) {
+        StandarizedApiExceptionResponse standarizedApiExceptionResponse = new StandarizedApiExceptionResponse("BUSINEES", "Input Output Error", "1024", ex.getMessage());
+        return ResponseEntity.status(ex.getHttpStatus()).body(standarizedApiExceptionResponse);
+    }
+
+}
