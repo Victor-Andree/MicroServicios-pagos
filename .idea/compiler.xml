@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eurekaserver" />
         <module name="product" />
-        <module name="eurekaServer" />
         <module name="configServer" />
+        <module name="eurekaServer" />
         <module name="transaction" />
         <module name="customer" />
         <module name="springBootAdmin" />
