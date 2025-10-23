@@ -1,0 +1,9 @@
+## YAML Template.
+---
+spring:
+  cloud:
+    routes:
+      - id: customer_service
+        uri: https://localhost:8081
+        predicates:
+          -Path=/customer/**
