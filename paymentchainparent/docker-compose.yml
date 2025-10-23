@@ -6,7 +6,7 @@ services:
     ports:
       - "8761:8761"
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M"
+      JAVA_OPTS: "-Xms256M -Xmx256M -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
     networks:
       - app-network
 

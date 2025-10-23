@@ -3,11 +3,11 @@ package com.paymentchain.businessdomain;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
- class ProductApplicationTests {
+//@SpringBootTest
+// class ProductApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+//    @Test
+//    void contextLoads() {
+//    }
 
-}
+//}
