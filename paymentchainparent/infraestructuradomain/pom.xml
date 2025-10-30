@@ -20,12 +20,10 @@
     </modules>
 
     <properties>
-       <!--spring cloud version, please check the table https://spring.io/projects/spring-cloud compatibility version with spring boot framework-->
           <spring-cloud-dependencies.version>2023.0.0</spring-cloud-dependencies.version>
     </properties>
     
-     <!--Allows consolidate and centralized management of deendency version witout adding dependencies
-    that are inherit by all children, it is useesfull whe we have a set of porjects that inherit a common parent.-->
+
     <dependencyManagement>
         <dependencies>
             <dependency>

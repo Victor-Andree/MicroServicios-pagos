@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>com.paymentchain</groupId>
-    <artifactId>configserver</artifactId>
+    <artifactId>configServer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>configserver</name>
+    <name>configServer</name>
 
     <dependencies>
         <dependency>
