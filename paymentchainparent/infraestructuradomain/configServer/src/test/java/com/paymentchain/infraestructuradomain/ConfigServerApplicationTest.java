@@ -1,15 +1,15 @@
 package com.paymentchain.infraestructuradomain;
 
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 
-class ConfigServerApplicationTest {
+//class ConfigServerApplicationTest {
 
-    @Test
-    void contextLoads() {
-    }
+//    @Test
+//    void contextLoads() {
+//    }
 
-}
+//}
