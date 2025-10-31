@@ -1,5 +1,5 @@
 # Imagen base con Java 17 Alpine
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 # Crear grupo y usuario sin privilegios
 RUN addgroup -g 1028 devopsc \

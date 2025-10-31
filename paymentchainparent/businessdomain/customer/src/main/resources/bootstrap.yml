@@ -1,23 +1,38 @@
 ## YAML Template.
-
 server:
-  port:8080
+  port: 0
 eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    reactor.netty.http.client: DEBUG
+  instance:
+    instance-id: ${spring.application.name:customer}:0
+    appname: customer
+    virtual-host-name: customer
+    hostname: customer
 
 spring:
   application:
-    name: apigateway
+    name: businessdomain-customer
   cloud:
-    gateway:
-      routes:
-        - id: customer_service
-          uri: lb://businessdomain-customer
-          predicates:
-            - Path=/**
+    config:
+      discovery:
+        enabled: true
+        service-id: configuration
+      failFast: true
+      name: config-client
+      profile: development
+      username: admin
+      password: qwerty
+      retry:
+        max-attempts: 6
+        max-interval: 2000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

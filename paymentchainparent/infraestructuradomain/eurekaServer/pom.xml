@@ -10,7 +10,7 @@
     <groupId>com.paymentchain</groupId>
     <artifactId>eurekaserver</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eurekaServer</name>
+    <name>eurekaserver</name>
 
     <dependencies>
         <dependency>

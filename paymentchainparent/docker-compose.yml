@@ -6,7 +6,10 @@ services:
     ports:
       - "8761:8761"
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
     networks:
       - app-network
 
@@ -17,7 +20,11 @@ services:
     volumes:
       - ./config-server-repo:/tmp/config-server-repo
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -DEUREKA_SERVER=http://registry-discovery:8761/eureka/ -DLOCAL_REPOSITORY=/tmp/config-server-repo -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration"
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DLOCAL_REPOSITORY=/tmp/config-server-repo
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
     depends_on:
       - registry-discovery
     ports:
@@ -25,12 +32,32 @@ services:
     networks:
       - app-network
 
-  # API Gateway
+  # SpringBootAdmin
+  springbootadmin:
+    container_name: id-springbootadmin
+    image: payment/microservice-docker-springbootadmin:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+    depends_on:
+      - registry-discovery
+    ports:
+      - "8762:8762"
+    networks:
+      - app-network
+
+  # API Gateway Service
   apigateway:
     container_name: id-apigateway
     image: payment/microservice-docker-apigateway:1.0-SNAPSHOT
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -DEUREKA_SERVER=http://registry-discovery:8761/eureka/ -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+        -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
     depends_on:
       - registry-discovery
       - configuration
@@ -39,26 +66,18 @@ services:
     networks:
       - app-network
 
-  # API SpringBootAdmin
-  springbootadmin:
-    container_name: id-springbootadmin
-    image: payment/microservice-docker-springbootadmin:0.0.1-SNAPSHOT
-    environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -DEUREKA_SERVER=http://registry-discovery:8761/eureka/ -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration"
-    depends_on:
-      - registry-discovery
-    ports:
-      - "8762:8762"
-    networks:
-      - app-network
   # Product Service
   product-catalog:
     container_name: bd-product-catalog
     image: payment/microservice-docker-product:0.0.1-SNAPSHOT
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -DEUREKA_SERVER=http://registry-discovery:8761/eureka/"
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
     depends_on:
       - registry-discovery
+      - configuration
     ports:
       - "8083:8083"
     networks:
@@ -69,31 +88,35 @@ services:
     container_name: bd-customer
     image: payment/microservice-docker-customer:0.0.1-SNAPSHOT
     environment:
-      JAVA_OPTS: "-Xms256M -Xmx256M -DEUREKA_SERVER=http://registry-discovery:8761/eureka/"
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
     depends_on:
       - registry-discovery
+      - configuration
     ports:
       - "8081:8080"
     networks:
       - app-network
 
-  # PostgreSQL
+  # PostgreSQL Database Service
   postgres:
-    image: postgres:15
     container_name: postgres_db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qwerty
-      POSTGRES_DB: postgres
+    image: postgres:15
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./dbfiles:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: postgres
     networks:
       - app-network
 
+  # PgAdmin Service
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_gui
