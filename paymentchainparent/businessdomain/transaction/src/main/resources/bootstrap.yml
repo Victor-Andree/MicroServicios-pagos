@@ -1,13 +1,13 @@
 ## YAML Template.
 server:
-  port: 0
+  port: 8082
 eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
 spring:
   application:
-    name: businessdomain-customer
+    name: businessdomain-transaction
   cloud:
     config:
       discovery:
@@ -21,6 +21,8 @@ spring:
       retry:
         max-attempts: 1
         max-interval: 1000
+  config:
+    import: "optional:configserver:http://configuration:8888"
 management:
   endpoints:
     web:

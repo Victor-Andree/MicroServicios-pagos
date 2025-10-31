@@ -1,18 +1,18 @@
 ## YAML Template.
 server:
-  port: 0
+  port: 8762
 eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
 spring:
   application:
-    name: businessdomain-customer
+    name: springbootadmin
   cloud:
     config:
       discovery:
         enabled: true
-        service-id: config-server
+        service-id: configuration
       failFast: true
       name: config-client
       profile: development
