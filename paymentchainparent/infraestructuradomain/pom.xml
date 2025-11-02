@@ -16,6 +16,7 @@
         <module>eurekaServer</module>
         <module>springBootAdmin</module>
         <module>apigateway</module>
+        <module>keycloackAdapter</module>
 
     </modules>
 

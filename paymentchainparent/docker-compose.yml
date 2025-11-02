@@ -145,6 +145,21 @@ services:
     networks:
       - app-network
 
+  # Keycloak Server
+  keycloak:
+    container_name: id-keycloak
+    image: quay.io/keycloak/keycloak:22.0.5
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_ENABLED: "true"
+    command: start-dev
+    ports:
+      - "8091:8080"
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
