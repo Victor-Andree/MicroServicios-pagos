@@ -114,6 +114,25 @@ services:
     networks:
       - app-network
 
+  # Keycloak Adapter Service
+  keycloak-adapter:
+    container_name: keycloak-adapter
+    image: payment/microservice-docker-keycloackadapter:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -Xms256M
+        -Xmx256M
+        -DEUREKA_SERVER=http://registry-discovery:8761/eureka/
+        -DKEYCLOACK_SERVER=http://keycloak:8080
+    depends_on:
+      - registry-discovery
+      - keycloak
+    ports:
+      - "8088:8088"
+    networks:
+      - app-network
+
+
   # PostgreSQL Database Service
   postgres:
     container_name: postgres_db

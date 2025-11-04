@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class KeyCloakResService {
+public class KeyCloakRestService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -45,13 +45,6 @@ public class KeyCloakResService {
     @Value("${keycloak.scope}")
     private String scope;
 
-    /**
-     *  login by using username and password to keycloak, and capturing token on response body
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     public String login(String username, String password) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("username",username);
@@ -70,11 +63,6 @@ public class KeyCloakResService {
         return getUserInfo(token);
     }
 
-    /**
-     *  logging out and disabling active token from keycloak
-     *
-     * @param refreshToken
-     */
     public void logout(String refreshToken) throws Exception {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("client_id",clientId);
@@ -101,11 +89,7 @@ public class KeyCloakResService {
         return restTemplate.postForObject(keycloakUserInfo, request, String.class);
     }
 
-    /**
-     *  logging out and disabling active token from keycloak
-     *
-     * @param refreshToken
-     */
+
     public String refresh(String refreshToken) throws Exception {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("client_id",clientId);

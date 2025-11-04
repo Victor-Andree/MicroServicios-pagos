@@ -1,4 +1,3 @@
-# Imagen base con Java 17 Alpine
 FROM eclipse-temurin:21-jre-alpine
 
 # Crear grupo y usuario sin privilegios
