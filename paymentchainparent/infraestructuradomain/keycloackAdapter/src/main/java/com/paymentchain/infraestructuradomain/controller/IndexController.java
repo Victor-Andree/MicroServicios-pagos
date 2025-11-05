@@ -78,8 +78,10 @@ public class IndexController {
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> login(@RequestParam String username,
-                                   @RequestParam String password) {
+    public ResponseEntity<?> login(
+            @RequestParam(value = "username", name = "username") String username,
+            @RequestParam(value = "password", name = "password") String password) {
+
         String login = restService.login(username, password);
         return ResponseEntity.ok(login);
     }
